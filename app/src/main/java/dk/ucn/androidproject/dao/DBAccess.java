@@ -8,10 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by ki on 16-10-2015.
  */
 public class DBAccess extends SQLiteOpenHelper {
+    private static DBAccess instance;
     private static final String DATABASE_NAME = "house-enabler-db";
+    private static final int VERSION = 1;
 
-    public DBAccess(Context context, int version) {
-        super(context, DATABASE_NAME, null, version);
+    public static DBAccess getInstance(Context context){
+        if (instance == null){
+            instance = new DBAccess(context.getApplicationContext());
+        }
+        return instance;
+    }
+
+    private DBAccess(Context context) {
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
