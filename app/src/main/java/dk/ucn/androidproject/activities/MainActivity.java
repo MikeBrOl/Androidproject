@@ -1,9 +1,11 @@
-package dk.ucn.androidproject;
+package dk.ucn.androidproject.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import dk.ucn.androidproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
