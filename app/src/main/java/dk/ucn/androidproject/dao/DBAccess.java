@@ -26,9 +26,10 @@ public class DBAccess extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(getCreateUserTableStatement());
-        db.execSQL(getCreateEvaluationTableStatement());
-        db.execSQL(getCreateItemCategoryTableStatement());
+        //db.execSQL(getCreateItemCategoryTableStatement());
+        ItemCategoryTableHelper.onCreate(db);
         db.execSQL(getCreateItemTableStatement());
+        db.execSQL(getCreateEvaluationTableStatement());
     }
 
     private String getCreateUserTableStatement()
@@ -44,10 +45,6 @@ public class DBAccess extends SQLiteOpenHelper {
     }
 
     private String getCreateEvaluationTableStatement() {
-        return null;
-    }
-
-    private String getCreateItemCategoryTableStatement() {
         return null;
     }
 

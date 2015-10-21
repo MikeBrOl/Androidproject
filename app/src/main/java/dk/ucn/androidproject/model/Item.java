@@ -4,12 +4,21 @@ package dk.ucn.androidproject.model;
  * Created by ki on 16-10-2015.
  */
 public class Item {
+    private long id;
     private String description;
     private String note;
     private int point;
     private String picture;
     private ItemCategory category;
     private String measurement;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ItemCategory getCategory() {
         return category;

@@ -9,6 +9,15 @@ import java.util.List;
 public class Evaluation {
     private Date date;
     private List<Item> evaluatedItems;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Date getDate() {
         return date;
