@@ -5,12 +5,13 @@ package dk.ucn.androidproject.model;
  */
 public class Item {
     private long id;
-    private String description;
+    private ItemDescription description;
     private String note;
     private int point;
     private String picture;
-    private ItemCategory category;
-    private String measurement;
+    private String lux;
+    private String slope;
+    private Evaluation evaluation;
 
     public long getId() {
         return id;
@@ -20,28 +21,28 @@ public class Item {
         this.id = id;
     }
 
-    public ItemCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ItemCategory category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
+    public ItemDescription getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(ItemDescription description) {
         this.description = description;
     }
 
-    public String getMeasurement() {
-        return measurement;
+    public String getLux() {
+        return lux;
     }
 
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
+    public void setLux(String lux) {
+        this.lux = lux;
+    }
+
+    public String getSlope() {
+        return slope;
+    }
+
+    public void setSlope(String slope) {
+        this.slope = slope;
     }
 
     public String getNote() {
@@ -66,5 +67,13 @@ public class Item {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public Evaluation getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(Evaluation evaluation) {
+        this.evaluation = evaluation;
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import dk.ucn.androidproject.model.ItemDescription;
+
 /**
  * Created by ki on 16-10-2015.
  */
@@ -26,10 +28,10 @@ public class DBAccess extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(getCreateUserTableStatement());
-        //db.execSQL(getCreateItemCategoryTableStatement());
         ItemCategoryTableHelper.onCreate(db);
-        db.execSQL(getCreateItemTableStatement());
-        db.execSQL(getCreateEvaluationTableStatement());
+        EvaluationTableHelper.onCreate(db);
+        ItemDescriptionTableHelper.onCreate(db);
+        ItemTableHelper.onCreate(db);
     }
 
     private String getCreateUserTableStatement()
@@ -42,14 +44,6 @@ public class DBAccess extends SQLiteOpenHelper {
                 + "password text not null, "
                 + "email text not null);";
         return query;
-    }
-
-    private String getCreateEvaluationTableStatement() {
-        return null;
-    }
-
-    private String getCreateItemTableStatement() {
-        return null;
     }
 
     @Override
