@@ -31,8 +31,16 @@ public class DBAccess extends SQLiteOpenHelper {
         db.execSQL(getCreateItemTableStatement());
     }
 
-    private String getCreateUserTableStatement() {
-        return null;
+    private String getCreateUserTableStatement()
+    {
+        String query = "create table "
+                + "users"
+                + "(" + "_id integer primary key autoincrement, "
+                + "name text not null, "
+                + "username text not null, "
+                + "password text not null, "
+                + "email text not null);";
+        return query;
     }
 
     private String getCreateEvaluationTableStatement() {

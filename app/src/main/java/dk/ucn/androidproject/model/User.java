@@ -4,6 +4,7 @@ package dk.ucn.androidproject.model;
  * Created by Mike on 16-10-2015.
  */
 public class User {
+    private long _id;
     private String name;
     private String userName;
     private String password;
@@ -39,5 +40,13 @@ public class User {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public long get_id() {
+        return _id;
+    }
+
+    public void set_id(long _id) {
+        this._id = _id;
     }
 }
