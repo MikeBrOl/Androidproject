@@ -35,7 +35,7 @@ public class DBAccess extends SQLiteOpenHelper {
     {
         String query = "create table "
                 + "users"
-                + "(" + "_id integer primary key autoincrement, "
+                + "(_id integer primary key autoincrement, "
                 + "name text not null, "
                 + "username text not null, "
                 + "password text not null, "
