@@ -32,6 +32,7 @@ public class ItemCategoryDao {
                 categories.add(new ItemCategory(cursor.getString(colIndex)));
             }while (cursor.moveToNext());
         }
+        cursor.close();
         return categories;
     }
 
