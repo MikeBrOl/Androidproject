@@ -3,6 +3,7 @@ package dk.ucn.androidproject.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import dk.ucn.androidproject.model.ItemDescription;
 
@@ -48,6 +49,17 @@ public class DBAccess extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.i("__DBAcess", "onUpgrade");
+        //DROP: Item, ItemDescription, ItemCategory, Evaluation, User
+        String DROP = "DROP TABLE IF EXISTS ";
+        db.execSQL(DROP + ItemTableHelper.TABLE_NAME);
+        db.execSQL(DROP + ItemDescriptionTableHelper.TABLE_NAME);
+        db.execSQL(DROP + ItemCategoryTableHelper.TABLE_NAME);
+        db.execSQL(DROP + EvaluationTableHelper.TABLE_NAME);
+        db.execSQL(DROP + "users");
+
+        //CREATE: User, ItemCategory, Evaluation, ItemDescription, Item
+        this.onCreate(db);
 
     }
 }

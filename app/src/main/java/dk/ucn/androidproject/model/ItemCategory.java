@@ -7,6 +7,7 @@ import java.util.List;
  * Created by ki on 16-10-2015.
  */
 public class ItemCategory {
+    private long id;
     private String title;
     private List<Item> items;
 
@@ -15,9 +16,20 @@ public class ItemCategory {
         items = new ArrayList<>();
     }
 
+    public ItemCategory() {
+    }
+
     public List<Item> getItems() {
         List<Item> itemList = items;
         return itemList;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -28,3 +40,4 @@ public class ItemCategory {
         this.title = title;
     }
 }
+

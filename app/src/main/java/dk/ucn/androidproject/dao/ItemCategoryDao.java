@@ -16,24 +16,32 @@ import dk.ucn.androidproject.model.ItemCategory;
 public class ItemCategoryDao {
     private DBAccess dbAccess;
     private SQLiteDatabase database;
+    private String[] allColumns;
 
     public ItemCategoryDao(Context context){
         dbAccess = DBAccess.getInstance(context);
         database = dbAccess.getWritableDatabase();
+        allColumns = new String[] {ItemCategoryTableHelper.COLUMN_ID, ItemCategoryTableHelper.COLUMN_TITLE};
     }
 
     public List<ItemCategory> getAllCategories(){
         List<ItemCategory> categories = new ArrayList<>();
-        String[] result = new String[] {ItemCategoryTableHelper.COLUMN_ID, ItemCategoryTableHelper.COLUMN_TITLE};
-        Cursor cursor = database.query(ItemCategoryTableHelper.TABLE_NAME, result, null, null, null, null, null, null);
+        Cursor cursor = database.query(ItemCategoryTableHelper.TABLE_NAME, allColumns, null, null, null, null, null, null);
         Integer colIndex = cursor.getColumnIndex(ItemCategoryTableHelper.COLUMN_TITLE);
         if (cursor.moveToFirst()){
             do {
-                categories.add(new ItemCategory(cursor.getString(colIndex)));
+                categories.add(cursorToItemCategory(cursor));
             }while (cursor.moveToNext());
         }
         cursor.close();
         return categories;
+    }
+
+    private ItemCategory cursorToItemCategory(Cursor cursor) {
+        ItemCategory category = new ItemCategory();
+        category.setId(cursor.getLong(0));
+        category.setTitle(cursor.getString(1));
+        return category;
     }
 
     public ItemCategory createCategory(String title){
@@ -43,4 +51,13 @@ public class ItemCategoryDao {
         database.insert(ItemCategoryTableHelper.TABLE_NAME, null, values);
         return category;
     }
+
+    public ItemCategory findCategoryById(Long id) {
+        Cursor cursor = database.query(ItemCategoryTableHelper.TABLE_NAME, allColumns, ItemCategoryTableHelper.COLUMN_ID + " = ?", new String[] {id.toString()}, null, null, null );
+        cursor.moveToFirst();
+        ItemCategory category = cursorToItemCategory(cursor);
+        cursor.close();
+        return category;
+    }
 }
+
