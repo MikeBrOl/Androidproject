@@ -8,8 +8,9 @@ public class ItemDescription {
     private String description;
     private ItemCategory category;
 
-    public ItemDescription(String description) {
-        this.description = description;
+    public ItemDescription(String description, ItemCategory category) {
+        setDescription(description);
+        setCategory(category);
     }
 
     public ItemDescription() {
