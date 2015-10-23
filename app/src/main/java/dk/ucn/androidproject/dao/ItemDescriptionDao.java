@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.ucn.androidproject.model.ItemCategory;
 import dk.ucn.androidproject.model.ItemDescription;
 
 /**
@@ -48,8 +49,8 @@ public class ItemDescriptionDao {
         return itemDescription;
     }
 
-    public ItemDescription createItemDescription(String description){
-        ItemDescription itemDescription = new ItemDescription(description);
+    public ItemDescription createItemDescription(String description, ItemCategory category){
+        ItemDescription itemDescription = new ItemDescription(description, category);
         ContentValues values = new ContentValues();
         values.put(ItemDescriptionTableHelper.COLUMN_DESCRIPTION, description);
         database.insert(ItemDescriptionTableHelper.TABLE_NAME, null, values);

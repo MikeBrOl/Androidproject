@@ -35,7 +35,7 @@ public class EvaluationActivity extends AppCompatActivity {
         }
 
         private HashMap<String, List<ItemDescription>> listsToChildData(List<ItemCategory> categories) {
-            HashMap<String, List<ItemDescription>> listDataChild = new HashMap<>();
+            listDataChild = new HashMap<>();
 
             for (ItemCategory category : categories){
                 List<ItemDescription> descriptions = itemDescriptionDao.getAllByCategory(category.getTitle());
