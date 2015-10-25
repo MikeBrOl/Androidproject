@@ -38,7 +38,7 @@ public class EvaluationActivity extends AppCompatActivity {
             listDataChild = new HashMap<>();
 
             for (ItemCategory category : categories){
-                List<ItemDescription> descriptions = itemDescriptionDao.getAllByCategory(category.getTitle());
+                List<ItemDescription> descriptions = itemDescriptionDao.getAllByCategory(itemCategoryDao.getCategoryId(category.getTitle()));
                 listDataChild.put(category.getTitle(), descriptions);
             }
             return listDataChild;
@@ -48,6 +48,11 @@ public class EvaluationActivity extends AppCompatActivity {
         protected void onPostExecute(HashMap<String, List<ItemDescription>> stringListHashMap) {
             expandableListView = (ExpandableListView)findViewById(R.id.expandableListView);
             listAdapter = new ExpandableItemListAdapter(getApplicationContext(), listDataChild, listDataHeader);
+            /*for (List<ItemDescription> descList : listDataChild.values()){
+                for (ItemDescription desc : descList){
+                    Log.i("__onPostExec", desc.getDescription());
+                }
+            }*/
             expandableListView.setAdapter(listAdapter);
         }
     }

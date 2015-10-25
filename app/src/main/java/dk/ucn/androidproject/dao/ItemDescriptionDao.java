@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +59,14 @@ public class ItemDescriptionDao {
     }
 
 
-    public List<ItemDescription> getAllByCategory(String category) {
+    public List<ItemDescription> getAllByCategory(long categoryId) {
         List<ItemDescription> itemList = new ArrayList<>();
-        Cursor cursor = database.query(ItemDescriptionTableHelper.TABLE_NAME, allColumns, ItemDescriptionTableHelper.COLUMN_CATEGORY + " = ?", new String[] {category}, null, null, null, null);
-
+        Cursor cursor = database.query(ItemDescriptionTableHelper.TABLE_NAME, allColumns, ItemDescriptionTableHelper.COLUMN_CATEGORY + " = ?", new String[] {"" + categoryId}, null, null, null, null);
         if (cursor.moveToFirst()){
             do {
-                itemList.add(cursorToItemDescription(cursor));
+                ItemDescription itemDesc = cursorToItemDescription(cursor);
+                itemList.add(itemDesc);
+                Log.i("__getAllByCat DAO", itemDesc.getCategory().getTitle());
             } while (cursor.moveToNext());
         }
         cursor.close();

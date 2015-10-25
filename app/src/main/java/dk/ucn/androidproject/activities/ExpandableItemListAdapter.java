@@ -37,17 +37,19 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).size();
+        String header = listDataHeader.get(groupPosition).getTitle();
+        return this.listDataChild.get(header).size();
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
+    public ItemCategory getGroup(int groupPosition) {
         return this.listDataHeader.get(groupPosition);
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return this.listDataChild.get(this.listDataHeader.get(groupPosition)).get(childPosition);
+    public ItemDescription getChild(int groupPosition, int childPosition) {
+        String header = this.listDataHeader.get(groupPosition).getTitle();
+        return this.listDataChild.get(header).get(childPosition);
     }
 
     @Override
@@ -67,7 +69,7 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String)getGroup(groupPosition).toString();
+        String headerTitle = (String)getGroup(groupPosition).getTitle();
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_group, null);
@@ -81,7 +83,7 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition, childPosition).toString();
+        final String childText = (String)getChild(groupPosition, childPosition).getDescription();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

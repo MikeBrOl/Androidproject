@@ -59,5 +59,20 @@ public class ItemCategoryDao {
         cursor.close();
         return category;
     }
+
+    public long getCategoryId(String title) {
+        long categoryId = -1;
+        String[] columns = new String[] {ItemCategoryTableHelper.COLUMN_ID, ItemCategoryTableHelper.COLUMN_TITLE};
+        Cursor cursor = database.query(ItemCategoryTableHelper.TABLE_NAME, columns,
+                ItemCategoryTableHelper.COLUMN_TITLE + " = ?", new String[] {title}, null, null, null, null);
+        Integer colIndex = cursor.getColumnIndex(ItemCategoryTableHelper.COLUMN_ID);
+        if (cursor.moveToFirst()){
+            do {
+                categoryId = cursor.getLong(colIndex);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return categoryId;
+    }
 }
 
