@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* //Starts EvaluationActivity
+        //Starts EvaluationActivity
         Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override
