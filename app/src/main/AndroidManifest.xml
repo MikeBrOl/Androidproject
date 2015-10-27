@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".activities.EvaluateItemActivity"
-            android:label="@string/title_activity_evaluate_item">
+            android:label="@string/title_activity_evaluate_item" >
         </activity>
     </application>
 

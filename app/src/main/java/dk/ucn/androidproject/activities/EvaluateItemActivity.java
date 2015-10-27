@@ -40,7 +40,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
         ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.points, R.layout.spinner_item);
         pointSpinner.setAdapter(spinnerAdapter);
 
-        TextView noteInput = (TextView)findViewById(R.id.txt_input_note);
+        TextView noteInput = (TextView)findViewById(R.id.txt_note);
 
     }
 }

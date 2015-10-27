@@ -18,8 +18,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_point"
-        android:text="@string/txt_point"
+        android:id="@+id/lbl_point"
+        android:text="@string/lbl_point"
         android:layout_below="@+id/txt_header"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -30,29 +30,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/point_spinner"
         android:layout_below="@+id/txt_header"
-        android:layout_toRightOf="@+id/txt_point"
-        android:layout_toEndOf="@+id/txt_point" />
+        android:layout_toRightOf="@+id/lbl_point"
+        android:layout_toEndOf="@+id/lbl_point" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_note"
-        android:text="@string/txt_note"
+        android:id="@+id/lbl_note"
+        android:text="@string/lbl_note"
+        android:inputType="none"
         android:layout_below="@+id/point_spinner"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="none" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_input_note"
-        android:layout_below="@+id/point_spinner"
-        android:layout_alignLeft="@+id/point_spinner"
-        android:layout_alignStart="@+id/point_spinner"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/txt_note" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -60,19 +49,67 @@
         android:text="@string/btn_save_item"
         android:id="@+id/btn_save"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/txt_input_note"
-        android:layout_alignEnd="@+id/txt_input_note"
-        android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="40dp" />
+        android:layout_alignRight="@+id/txt_note"
+        android:layout_alignEnd="@+id/txt_note" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_lux"
+        android:text="@string/lbl_lux"
+        android:layout_below="@+id/lbl_note"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:inputType="text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_slope"
+        android:text="@string/lbl_slope"
+        android:layout_below="@+id/lbl_lux"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txt_note"
+        android:layout_below="@+id/lbl_point"
+        android:layout_toRightOf="@+id/lbl_point"
+        android:layout_above="@+id/lbl_lux"
+        android:layout_alignRight="@+id/point_spinner"
+        android:layout_alignEnd="@+id/point_spinner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txt_lux"
+        android:layout_alignLeft="@+id/txt_note"
+        android:layout_alignStart="@+id/txt_note"
+        android:layout_alignBottom="@+id/lbl_lux"
+        android:layout_below="@+id/txt_note" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txt_slope"
+        android:layout_toEndOf="@+id/lbl_slope"
+        android:layout_alignTop="@+id/lbl_slope"
+        android:layout_toRightOf="@+id/lbl_slope"
+        android:layout_alignBottom="@+id/lbl_slope" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txt_input_note"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btn_save">
+        android:layout_above="@+id/btn_save"
+        android:layout_below="@+id/txt_slope">
 
         <Button
             android:layout_width="fill_parent"
