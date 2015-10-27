@@ -2,7 +2,9 @@ package dk.ucn.androidproject.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,7 +42,14 @@ public class EvaluateItemActivity extends AppCompatActivity {
         ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.points, R.layout.spinner_item);
         pointSpinner.setAdapter(spinnerAdapter);
 
-        TextView noteInput = (TextView)findViewById(R.id.txt_note);
+        EditText noteInput = (EditText)findViewById(R.id.txt_note);
+        noteInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
 
     }
 }
