@@ -70,6 +70,15 @@ public class UserDao {
         return user;
     }
 
+    public User getUserByUsername(String userName)
+    {
+        Cursor c = database.query("users", allColumns, "userName = " + userName, null, null, null, null);
+        c.moveToFirst();
+        User user = cursorToUser(c);
+        c.close();
+        return user;
+    }
+
     private User cursorToUser(Cursor c)
     {
         User user = new User();
