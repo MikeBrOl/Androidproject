@@ -29,25 +29,28 @@ import dk.ucn.androidproject.model.User;
 public class EvaluationActivity extends AppCompatActivity {
 
 
+
     private ItemCategoryDao itemCategoryDao;
     private ItemDescriptionDao itemDescriptionDao;
     private ExpandableListView expandableListView;
     private ExpandableItemListAdapter listAdapter;
     private List<ItemCategory> listDataHeader;
     private HashMap<String, List<ItemDescription>> listDataChild;
-    private List<Item> evaluatedItems;
-    private Evaluation evaluation;
-    private EvaluationDao evaluationDao;
     private ItemDescription currentDescription;
     private long currentEvaluationId;
     private long currentItemDescriptionId;
     private String currentDescriptionTitle;
+    private int currentListChildPosition;
+    private int currentListGroupPosition;
     public static final String CURRENT_EVALUATION_ID = "CURRENT_EVALUATION_ID";
     public static final String CURRENT_ITEM_DESCRIPTION_ID = "CURRENT_ITEM_DESCRIPTION_ID";
     public static final String CURRENT_DESCRIPTION = "CURRENT_DESCRIPTION";
     public static final java.lang.String CURRENT_LUX_MEASURABLITY = "CURRENT_LUX_MEASURABILITY";
     public static final java.lang.String CURRENT_SLOPE_MEASURABILITY ="CURRENT_SLOPE_MEASURABILITY";
+    private static final String LIST_CHILD_POSITION = "LIST_CHILD_POSITION";
+    private static final String LIST_GROUP_POSITION = "LIST_GROUP_POSITION";
     private static final int EVALUATE_ITEM_REQUEST = 1;
+
 
     private class DownloadDataTask extends AsyncTask<Context, Integer, HashMap<String,List<ItemDescription>>> {
         @Override
@@ -78,7 +81,11 @@ public class EvaluationActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation);
-        Log.i("__Evaluation", "evaluation_activity");
+
+        if (savedInstanceState != null){
+            currentListGroupPosition = savedInstanceState.getInt(LIST_GROUP_POSITION);
+            currentListChildPosition = savedInstanceState.getInt(LIST_CHILD_POSITION);
+        }
 
         itemCategoryDao = new ItemCategoryDao(getApplicationContext());
         itemDescriptionDao = new ItemDescriptionDao(getApplicationContext());
@@ -91,9 +98,14 @@ public class EvaluationActivity extends AppCompatActivity {
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                currentListGroupPosition = groupPosition;
+                currentListChildPosition = childPosition;
                 currentDescription = listAdapter.getChild(groupPosition, childPosition);
                 currentItemDescriptionId = listAdapter.getChild(groupPosition, childPosition).getId();
                 currentDescriptionTitle = listAdapter.getChild(groupPosition, childPosition).getDescription();
+
+                v.setSelected(true);
+
                 Intent evaluateItem = new Intent(getApplicationContext(), EvaluateItemActivity.class);
                 evaluateItem.putExtra(CURRENT_EVALUATION_ID, currentEvaluationId);
                 evaluateItem.putExtra(CURRENT_ITEM_DESCRIPTION_ID, currentItemDescriptionId);
@@ -113,18 +125,18 @@ public class EvaluationActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 currentDescription.setIsHandled(true);
                 //TODO something to mark that Item has been handled
+
             }
         }
     }
 
     private void createNewEvaluation() {
-        //create new evaluation: setUser, setDate, setItems(empty list)
-        evaluation = new Evaluation();
-        evaluatedItems = new ArrayList<>();
+        //create new evaluation: setUser, setDate
+        //TODO bind user
+        Evaluation evaluation = new Evaluation();
         evaluation.setDate(new Date());
         evaluation.setUser(new User()); // get user from bundle
-        evaluation.setEvaluatedItems(evaluatedItems);
-        evaluationDao = new EvaluationDao(getApplicationContext());
+        EvaluationDao evaluationDao = new EvaluationDao(getApplicationContext());
         currentEvaluationId = evaluationDao.createEvaluation(evaluation);
     }
 
@@ -132,6 +144,12 @@ public class EvaluationActivity extends AppCompatActivity {
         new DownloadDataTask().execute(applicationContext);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(LIST_CHILD_POSITION, currentListChildPosition);
+        outState.putInt(LIST_GROUP_POSITION, currentListGroupPosition);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
