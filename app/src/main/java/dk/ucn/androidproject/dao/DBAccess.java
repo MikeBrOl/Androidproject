@@ -112,9 +112,9 @@ public class DBAccess extends SQLiteOpenHelper {
                 + "users"
                 + "(_id integer primary key autoincrement, "
                 + "name text not null, "
-                + "username text not null, "
+                + "username text UNIQUE, "
                 + "password text not null, "
-                + "email text not null);";
+                + "email text UNIQUE);";
         return query;
     }
 

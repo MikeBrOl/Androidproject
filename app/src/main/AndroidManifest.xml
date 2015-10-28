@@ -28,6 +28,8 @@
             android:name=".activities.LuxReadingActivity"
             android:label="@string/title_activity_lux_reading" >
         </activity>
+        <activity android:name=".activities.newUserActivity" >
+        </activity>
     </application>
 
 </manifest>
