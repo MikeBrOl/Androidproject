@@ -64,7 +64,8 @@
         android:id="@+id/btn_main_create"
         android:layout_below="@+id/input_main_password"
         android:layout_alignRight="@+id/input_main_password"
-        android:layout_alignEnd="@+id/input_main_password" />
+        android:layout_alignEnd="@+id/input_main_password"
+        android:onClick="newUser"/>
 
     <Button
         android:layout_width="wrap_content"

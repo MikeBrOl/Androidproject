@@ -81,4 +81,10 @@ public class MainActivity extends AppCompatActivity {
 //         //bad login!
 //        }
     }
+
+    public void newUser(View view)
+    {
+        Intent intent = new Intent(getApplicationContext(), newUserActivity.class);
+        startActivity(intent);
+    }
 }
