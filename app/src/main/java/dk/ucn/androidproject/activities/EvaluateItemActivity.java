@@ -1,5 +1,6 @@
 package dk.ucn.androidproject.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
     private long currentEvaluationId;
     private String currentDescriptionTitle;
     private Item currentItem;
+    public boolean isHandled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +98,16 @@ public class EvaluateItemActivity extends AppCompatActivity {
     private void saveCurrentItem() {
         //TODO insert current item into database
         //TODO mark handled checked on item description
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //TODO override
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("EvaluateItemActivity", true);
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 
     private void setVisibilityOfWidgets(boolean isLuxMeasurable,boolean isSlopeMeasurable) {

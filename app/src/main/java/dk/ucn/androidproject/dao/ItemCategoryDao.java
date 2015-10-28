@@ -27,7 +27,6 @@ public class ItemCategoryDao {
     public List<ItemCategory> getAllCategories(){
         List<ItemCategory> categories = new ArrayList<>();
         Cursor cursor = database.query(ItemCategoryTableHelper.TABLE_NAME, allColumns, null, null, null, null, null, null);
-        Integer colIndex = cursor.getColumnIndex(ItemCategoryTableHelper.COLUMN_TITLE);
         if (cursor.moveToFirst()){
             do {
                 categories.add(cursorToItemCategory(cursor));

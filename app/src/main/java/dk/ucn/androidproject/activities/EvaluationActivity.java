@@ -28,6 +28,7 @@ import dk.ucn.androidproject.model.User;
 
 public class EvaluationActivity extends AppCompatActivity {
 
+
     private ItemCategoryDao itemCategoryDao;
     private ItemDescriptionDao itemDescriptionDao;
     private ExpandableListView expandableListView;
@@ -45,6 +46,7 @@ public class EvaluationActivity extends AppCompatActivity {
     public static final String CURRENT_DESCRIPTION = "CURRENT_DESCRIPTION";
     public static final java.lang.String CURRENT_LUX_MEASURABLITY = "CURRENT_LUX_MEASURABILITY";
     public static final java.lang.String CURRENT_SLOPE_MEASURABILITY ="CURRENT_SLOPE_MEASURABILITY";
+    private static final int EVALUATE_ITEM_REQUEST = 1;
 
     private class DownloadDataTask extends AsyncTask<Context, Integer, HashMap<String,List<ItemDescription>>> {
         @Override
@@ -96,11 +98,20 @@ public class EvaluationActivity extends AppCompatActivity {
                 evaluateItem.putExtra(CURRENT_DESCRIPTION, currentDescriptionTitle);
                 evaluateItem.putExtra(CURRENT_LUX_MEASURABLITY, listAdapter.getChild(groupPosition, childPosition).isLuxMeasurable());
                 evaluateItem.putExtra(CURRENT_SLOPE_MEASURABILITY, listAdapter.getChild(groupPosition, childPosition).isSlopeMeasurable());
-                startActivity(evaluateItem);
+                startActivityForResult(evaluateItem, EVALUATE_ITEM_REQUEST);
 
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EVALUATE_ITEM_REQUEST){
+            if(resultCode == RESULT_OK){
+                //TODO do something to mark the last description handled
+            }
+        }
     }
 
     private void createNewEvaluation() {
