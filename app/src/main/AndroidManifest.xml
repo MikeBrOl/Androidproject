@@ -24,6 +24,10 @@
             android:name=".activities.EvaluateItemActivity"
             android:label="@string/title_activity_evaluate_item" >
         </activity>
+        <activity
+            android:name=".activities.LuxReadingActivity"
+            android:label="@string/title_activity_lux_reading" >
+        </activity>
     </application>
 
 </manifest>
