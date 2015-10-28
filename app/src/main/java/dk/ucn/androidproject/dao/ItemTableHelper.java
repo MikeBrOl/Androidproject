@@ -21,10 +21,10 @@ public class ItemTableHelper {
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_DESCRIPTION + " INTEGER NOT NULL, " +
                     COLUMN_POINT + " INTEGER NOT NULL, " +
-                    COLUMN_NOTE + " TEXT NOT NULL, " +
-                    COLUMN_PICTURE + " TEXT NOT NULL, " +
-                    COLUMN_LUX + " TEXT NOT NULL, " +
-                    COLUMN_SLOPE +  " TEXT NOT NULL, " +
+                    COLUMN_NOTE + " TEXT, " +
+                    COLUMN_PICTURE + " TEXT, " +
+                    COLUMN_LUX + " TEXT, " +
+                    COLUMN_SLOPE +  " TEXT, " +
                     COLUMN_EVALUATION + " INTEGER NOT NULL, " +
                     "FOREIGN KEY(" + COLUMN_DESCRIPTION + ") REFERENCES " + ItemDescriptionTableHelper.TABLE_NAME +
                     "(" + ItemCategoryTableHelper.COLUMN_ID + ")" +

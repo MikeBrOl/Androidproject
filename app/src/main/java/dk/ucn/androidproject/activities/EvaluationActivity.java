@@ -38,6 +38,7 @@ public class EvaluationActivity extends AppCompatActivity {
     private List<Item> evaluatedItems;
     private Evaluation evaluation;
     private EvaluationDao evaluationDao;
+    private ItemDescription currentDescription;
     private long currentEvaluationId;
     private long currentItemDescriptionId;
     private String currentDescriptionTitle;
@@ -90,6 +91,7 @@ public class EvaluationActivity extends AppCompatActivity {
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                currentDescription = listAdapter.getChild(groupPosition, childPosition);
                 currentItemDescriptionId = listAdapter.getChild(groupPosition, childPosition).getId();
                 currentDescriptionTitle = listAdapter.getChild(groupPosition, childPosition).getDescription();
                 Intent evaluateItem = new Intent(getApplicationContext(), EvaluateItemActivity.class);
@@ -109,7 +111,8 @@ public class EvaluationActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EVALUATE_ITEM_REQUEST){
             if(resultCode == RESULT_OK){
-                //TODO do something to mark the last description handled
+                currentDescription.setIsHandled(true);
+                //TODO something to mark that Item has been handled
             }
         }
     }
