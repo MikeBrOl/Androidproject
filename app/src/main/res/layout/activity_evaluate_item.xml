@@ -90,6 +90,20 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="@string/btn_measure_lux"
+            android:id="@+id/btn_measure_lux"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_measure_slope"
+            android:id="@+id/btn_measure_slope"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/btn_take_picture"
             android:id="@+id/btn_take_picture"
             android:layout_gravity="center_horizontal" />
@@ -101,19 +115,6 @@
             android:id="@+id/btn_see_picture"
             android:layout_gravity="center_horizontal" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_measure_lux"
-            android:id="@+id/btn_measure_lux"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_measure_slope"
-            android:id="@+id/btn_measure_slope"
-            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <Button

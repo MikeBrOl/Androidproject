@@ -43,7 +43,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
         TextView header = (TextView)findViewById(R.id.txt_header);
         header.setText(currentDescriptionTitle);
 
-        final Spinner pointSpinner = (Spinner)findViewById(R.id.point_spinner);
+        Spinner pointSpinner = (Spinner)findViewById(R.id.point_spinner);
         ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.points, R.layout.spinner_item);
         pointSpinner.setAdapter(spinnerAdapter);
 
@@ -59,32 +59,67 @@ public class EvaluateItemActivity extends AppCompatActivity {
             }
         });
 
-        final EditText noteInput = (EditText)findViewById(R.id.txt_note);
+        EditText noteInput = (EditText)findViewById(R.id.txt_note);
         noteInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleNoteFieldClicked(noteInput.getText().toString());
+                handleNoteFieldClicked(((EditText)v.findViewById(R.id.txt_note)).getText().toString());
+            }
+        });
+
+        Button btnLux = (Button)findViewById(R.id.btn_measure_lux);
+        btnLux.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO measure lux intent
+            }
+        });
+
+        Button btnSlope = (Button)findViewById(R.id.btn_measure_slope);
+        btnSlope.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO measure slope intent
+            }
+        });
+
+        Button btnSave = (Button)findViewById(R.id.btn_save);
+        btnLux.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveCurrentItem();
             }
         });
 
     }
 
+    private void saveCurrentItem() {
+        //TODO insert current item into database
+        //TODO mark handled checked on item description
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //TODO override
+    }
+
     private void setVisibilityOfWidgets(boolean isLuxMeasurable,boolean isSlopeMeasurable) {
         TextView lblLux = (TextView)findViewById(R.id.lbl_lux);
         EditText txtLux = (EditText)findViewById(R.id.txt_lux);
-        lblLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.INVISIBLE);
-        txtLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.INVISIBLE);
+        lblLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.GONE);
+        txtLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.GONE);
 
         TextView lblSlope = (TextView)findViewById(R.id.lbl_slope);
         EditText txtSlope  = (EditText)findViewById(R.id.txt_slope);
-        lblSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.INVISIBLE);
-        txtSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE: View.INVISIBLE);
+        lblSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.GONE);
+        txtSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE: View.GONE);
 
         Button btnLux = (Button)findViewById(R.id.btn_measure_lux);
-        btnLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.INVISIBLE);
+        btnLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.GONE);
 
         Button btnSlope = (Button)findViewById(R.id.btn_measure_slope);
-        btnSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.INVISIBLE);
+        btnSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.GONE);
     }
 
     private void handleNoteFieldClicked(String text) {
