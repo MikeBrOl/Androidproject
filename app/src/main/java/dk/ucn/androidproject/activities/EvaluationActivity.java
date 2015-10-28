@@ -43,6 +43,8 @@ public class EvaluationActivity extends AppCompatActivity {
     public static final String CURRENT_EVALUATION_ID = "CURRENT_EVALUATION_ID";
     public static final String CURRENT_ITEM_DESCRIPTION_ID = "CURRENT_ITEM_DESCRIPTION_ID";
     public static final String CURRENT_DESCRIPTION = "CURRENT_DESCRIPTION";
+    public static final java.lang.String CURRENT_LUX_MEASURABLITY = "CURRENT_LUX_MEASURABILITY";
+    public static final java.lang.String CURRENT_SLOPE_MEASURABILITY ="CURRENT_SLOPE_MEASURABILITY";
 
     private class DownloadDataTask extends AsyncTask<Context, Integer, HashMap<String,List<ItemDescription>>> {
         @Override
@@ -65,11 +67,6 @@ public class EvaluationActivity extends AppCompatActivity {
         protected void onPostExecute(HashMap<String, List<ItemDescription>> stringListHashMap) {
             expandableListView = (ExpandableListView)findViewById(R.id.expandableListView);
             listAdapter = new ExpandableItemListAdapter(getApplicationContext(), listDataChild, listDataHeader);
-            /*for (List<ItemDescription> descList : listDataChild.values()){
-                for (ItemDescription desc : descList){
-                    Log.i("__onPostExec", desc.getDescription());
-                }
-            }*/
             expandableListView.setAdapter(listAdapter);
         }
     }
@@ -97,6 +94,8 @@ public class EvaluationActivity extends AppCompatActivity {
                 evaluateItem.putExtra(CURRENT_EVALUATION_ID, currentEvaluationId);
                 evaluateItem.putExtra(CURRENT_ITEM_DESCRIPTION_ID, currentItemDescriptionId);
                 evaluateItem.putExtra(CURRENT_DESCRIPTION, currentDescriptionTitle);
+                evaluateItem.putExtra(CURRENT_LUX_MEASURABLITY, listAdapter.getChild(groupPosition, childPosition).isLuxMeasurable());
+                evaluateItem.putExtra(CURRENT_SLOPE_MEASURABILITY, listAdapter.getChild(groupPosition, childPosition).isSlopeMeasurable());
                 startActivity(evaluateItem);
 
                 return true;

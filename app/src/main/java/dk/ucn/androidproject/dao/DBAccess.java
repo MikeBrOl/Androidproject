@@ -18,7 +18,7 @@ import dk.ucn.androidproject.model.TestData;
 public class DBAccess extends SQLiteOpenHelper {
     private static DBAccess instance;
     private static final String DATABASE_NAME = "house-enabler-db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 4;
 
     private class InsertTestDataTask extends AsyncTask<SQLiteDatabase, Integer, Boolean> {
 
@@ -53,7 +53,7 @@ public class DBAccess extends SQLiteOpenHelper {
         }
 
         private void insertDescriptionsBulk(SQLiteDatabase db) {
-            String sql = "INSERT INTO " + ItemDescriptionTableHelper.TABLE_NAME + " VALUES (?, ?, ?);";
+            String sql = "INSERT INTO " + ItemDescriptionTableHelper.TABLE_NAME + " VALUES (?, ?, ?, ?, ?);";
             Log.i("__InsertDesc", sql);
             SQLiteStatement statement = db.compileStatement(sql);
             db.beginTransaction();
@@ -61,6 +61,8 @@ public class DBAccess extends SQLiteOpenHelper {
                 statement.clearBindings();
                 statement.bindString(2, desc.getDescription());
                 statement.bindLong(3, getForeignKeyIndex(db, desc.getCategory().getTitle()));
+                statement.bindLong(4, (desc.isLuxMeasurable() ? 1 : 0));
+                statement.bindLong(5, (desc.isSlopeMeasurable() ? 1 : 0));
                 statement.execute();
             }
             db.setTransactionSuccessful();

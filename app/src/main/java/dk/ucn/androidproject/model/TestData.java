@@ -33,20 +33,20 @@ public class TestData {
 
     private void setDescriptions() {
         descriptions = new ArrayList<>();
-        descriptions.add(new ItemDescription("Smallere end 1,5 m.", categories.get(0)));
-        descriptions.add(new ItemDescription("Trappetrin højere end 20 cm.", categories.get(0)));
-        descriptions.add(new ItemDescription("Ujævne trappetrin.", categories.get(0)));
-        descriptions.add(new ItemDescription("Utilstrækkeligt lysforhold.", categories.get(0)));
+        descriptions.add(new ItemDescription("A1. Trapper smallere end 1,5 m.", categories.get(0), false, false));
+        descriptions.add(new ItemDescription("A2. Trappetrin højere end 20 cm.", categories.get(0), false, false));
+        descriptions.add(new ItemDescription("A3. Ujævne trappetrin.", categories.get(0), false, false));
+        descriptions.add(new ItemDescription("A4. Trappe: Utilstrækkeligt lysforhold.", categories.get(0), true, false));
 
-        descriptions.add(new ItemDescription("Indgang smallere end 1,5 m.", categories.get(1)));
-        descriptions.add(new ItemDescription("Ustabil belægning.", categories.get(1)));
-        descriptions.add(new ItemDescription("Utilstrækkeligt lysforhold.", categories.get(1)));
-        descriptions.add(new ItemDescription("Stejle hældninger (over 1:20).", categories.get(1)));
+        descriptions.add(new ItemDescription("A5. Indgang smallere end 1,5 m.", categories.get(1), false, false));
+        descriptions.add(new ItemDescription("A6. Ustabil belægning ved indgang.", categories.get(1), false, false));
+        descriptions.add(new ItemDescription("A7. Utilstrækkeligt lysforhold.", categories.get(1), true, false));
+        descriptions.add(new ItemDescription("A8. Stejle hældninger (over 1:20) ved indgang.", categories.get(1), false, true));
 
-        descriptions.add(new ItemDescription("Smallere end 1,5 m.", categories.get(2)));
-        descriptions.add(new ItemDescription("Utilstrækkeligt lysforhold.", categories.get(2)));
+        descriptions.add(new ItemDescription("A9. Elevatordør Smallere end 1,5 m.", categories.get(2), false, false));
+        descriptions.add(new ItemDescription("A10. Utilstrækkeligt lysforhold i elevator.", categories.get(2), true, false));
 
-        descriptions.add(new ItemDescription("Ujævnheder på rampen.", categories.get(3)));
-        descriptions.add(new ItemDescription("Stejle hældninger (over 1:20).", categories.get(3)));
+        descriptions.add(new ItemDescription("A11. Ujævnheder på rampen.", categories.get(3), false, false));
+        descriptions.add(new ItemDescription("A12. Stejle hældninger (over 1:20).", categories.get(3), false, true));
     }
 }

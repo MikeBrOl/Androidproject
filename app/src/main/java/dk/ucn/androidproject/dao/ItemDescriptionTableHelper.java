@@ -11,11 +11,15 @@ public class ItemDescriptionTableHelper {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_CATEGORY = "category_id";
+    public static final String COLUMN_IS_LUX_MEASURABLE = "lux";
+    public static final String COLUMN_IS_SLOPE_MEASURABLE = "slope";
     private static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
                     COLUMN_CATEGORY + " INTEGER NOT NULL, " +
+                    COLUMN_IS_LUX_MEASURABLE + " INTEGER NOT NULL, " +
+                    COLUMN_IS_SLOPE_MEASURABLE + " INTEGER NOT NULL, " +
                     "FOREIGN KEY(" + COLUMN_CATEGORY + ") REFERENCES " + ItemCategoryTableHelper.TABLE_NAME +
                     "(" + ItemCategoryTableHelper.COLUMN_ID + "));"
             ;

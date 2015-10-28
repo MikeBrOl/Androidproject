@@ -25,13 +25,13 @@ public class ItemDescriptionDao {
         this.context = context;
         dbAccess = DBAccess.getInstance(context);
         database = dbAccess.getWritableDatabase();
-        allColumns = new String[] {ItemDescriptionTableHelper.COLUMN_ID, ItemDescriptionTableHelper.COLUMN_DESCRIPTION, ItemDescriptionTableHelper.COLUMN_CATEGORY};
+        allColumns = new String[] {ItemDescriptionTableHelper.COLUMN_ID, ItemDescriptionTableHelper.COLUMN_DESCRIPTION,
+                ItemDescriptionTableHelper.COLUMN_CATEGORY, ItemDescriptionTableHelper.COLUMN_IS_LUX_MEASURABLE, ItemDescriptionTableHelper.COLUMN_IS_SLOPE_MEASURABLE};
     }
 
     public List<ItemDescription> getAllItemDescriptions(){
         List<ItemDescription> itemList = new ArrayList<>();
-        String[] result = new String[]{ItemDescriptionTableHelper.COLUMN_ID, ItemDescriptionTableHelper.COLUMN_DESCRIPTION, ItemDescriptionTableHelper.COLUMN_CATEGORY};
-        Cursor cursor = database.query(ItemDescriptionTableHelper.TABLE_NAME, result, null, null, null, null, null, null);
+        Cursor cursor = database.query(ItemDescriptionTableHelper.TABLE_NAME, allColumns, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()){
             do {
@@ -47,14 +47,8 @@ public class ItemDescriptionDao {
         itemDescription.setId(cursor.getLong(0));
         itemDescription.setDescription(cursor.getString(1));
         itemDescription.setCategory(new ItemCategoryDao(this.context).findCategoryById(cursor.getLong(2)));
-        return itemDescription;
-    }
-
-    public ItemDescription createItemDescription(String description, ItemCategory category){
-        ItemDescription itemDescription = new ItemDescription(description, category);
-        ContentValues values = new ContentValues();
-        values.put(ItemDescriptionTableHelper.COLUMN_DESCRIPTION, description);
-        database.insert(ItemDescriptionTableHelper.TABLE_NAME, null, values);
+        itemDescription.setLuxMeasurable(cursor.getInt(3) == 1 ? true : false);
+        itemDescription.setSlopeMeasurable(cursor.getInt(4) == 1 ? true : false);
         return itemDescription;
     }
 
