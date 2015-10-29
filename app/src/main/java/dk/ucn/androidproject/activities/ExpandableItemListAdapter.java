@@ -2,6 +2,7 @@ package dk.ucn.androidproject.activities;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,32 +71,37 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        GroupViewHolder viewHolder;
         String headerTitle = (String)getGroup(groupPosition).getTitle();
+
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_group, null);
+            viewHolder = new GroupViewHolder();
+            viewHolder.txtGroupHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
+            convertView.setTag(viewHolder);
         }
-        TextView lblListHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        else {
+            viewHolder = (GroupViewHolder)convertView.getTag();
+        }
+
+        //TextView lblListHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
+        viewHolder.txtGroupHeader.setTypeface(null, Typeface.BOLD);
+        viewHolder.txtGroupHeader.setText(headerTitle);
         return convertView;
 
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        //TODO Holderpattern
         final String childText = (String)getChild(groupPosition, childPosition).getDescription();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_item, null);
         }
-
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
-        /*CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
-        checkBox.setChecked(false);
-        checkBox.setClickable(false);*/
-
         txtListChild.setText(childText);
         return convertView;
     }
@@ -103,6 +109,14 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public static class GroupViewHolder {
+        private TextView txtGroupHeader;
+    }
+
+    public static class ChildViewHolder {
+        private TextView txtChildText;
     }
 }
 
