@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-//import org.jasypt.util.*;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 import dk.ucn.androidproject.R;
 import dk.ucn.androidproject.dao.UserDao;
@@ -53,33 +53,33 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view)
     {
-        Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
+//        startActivity(intent);
 
 
-//        EditText editText_userName = (EditText) findViewById(R.id.input_main_userName);
-//        String userName = editText_userName.getText().toString();
-//
-//        EditText editText_password = (EditText) findViewById(R.id.input_main_password);
-//        String inputPassword = editText_password.getText().toString();
-//
-//        UserDao ud = new UserDao(this);
-//        User user = ud.getUserByUsername(userName);
-//
-//        BasicPasswordEncryptor pe = new BasicPasswordEncryptor();
-//        String encryptedPassword = user.getPassword();
-//
-//        if(pe.checkPassword(inputPassword, encryptedPassword))
-//        {
-//            Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
-//            long userID = user.get_id();
-//            intent.putExtra(EXTRA_USER_ID, userID);
-//            startActivity(intent);
-//        }
-//        else
-//        {
-//         //bad login!
-//        }
+        EditText editText_userName = (EditText) findViewById(R.id.input_main_userName);
+        String userName = editText_userName.getText().toString();
+
+        EditText editText_password = (EditText) findViewById(R.id.input_main_password);
+        String inputPassword = editText_password.getText().toString();
+
+        UserDao ud = new UserDao(this);
+        User user = ud.getUserByUsername(userName);
+
+        BasicPasswordEncryptor pe = new BasicPasswordEncryptor();
+        String encryptedPassword = user.getPassword();
+
+        if(pe.checkPassword(inputPassword, encryptedPassword))
+        {
+            Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
+            long userID = user.get_id();
+            intent.putExtra(EXTRA_USER_ID, userID);
+            startActivity(intent);
+        }
+        else
+        {
+         //bad login!
+        }
     }
 
     public void newUser(View view)

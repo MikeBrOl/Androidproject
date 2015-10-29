@@ -31,7 +31,7 @@ public class UserDao {
         values.put("name", user.getName());
         values.put("username", user.getUserName());
         values.put("password", user.getPassword());
-        values.put("email", user.geteMail());
+        values.put("email", user.getMail());
 
         database.insert("users", null, values);
     }
@@ -86,7 +86,7 @@ public class UserDao {
         user.setName(c.getString(1));
         user.setUserName(c.getString(2));
         user.setPassword(c.getString(3));
-        user.seteMail(c.getString(4));
+        user.setMail(c.getString(4));
 
         return user;
     }
