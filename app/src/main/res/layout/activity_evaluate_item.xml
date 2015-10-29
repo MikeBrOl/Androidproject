@@ -92,7 +92,8 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_measure_lux"
             android:id="@+id/btn_measure_lux"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onGetLuxClick"/>
 
         <Button
             android:layout_width="fill_parent"

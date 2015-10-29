@@ -162,4 +162,21 @@ public class EvaluateItemActivity extends AppCompatActivity {
     }
 
 
+    public void onGetLuxClick(View view) {
+        Intent getLuxReadingScreen = new Intent(this, LuxReadingActivity.class);
+
+        final int result = 1;
+
+        //getLuxReadingScreen.putExtra("callingLux", "EvaluateItemActivity");
+        startActivityForResult(getLuxReadingScreen, result);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        
+        String luxSentBack = data.getStringExtra("LuxReading");
+
+    }
 }

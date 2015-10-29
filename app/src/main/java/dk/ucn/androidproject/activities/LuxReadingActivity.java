@@ -1,6 +1,7 @@
 package dk.ucn.androidproject.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import dk.ucn.androidproject.R;
@@ -24,6 +26,13 @@ public class LuxReadingActivity extends AppCompatActivity implements SensorEvent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lux_reading);
+        Intent activityThatCalled = getIntent();
+
+        //String previousActivity = activityThatCalled.getExtras().getString("callingLux");
+        //TextView callingActivityMessage = (TextView)
+                //findViewById(R.id.calling_activity_info_text_view);
+                //callingActivityMessage.append(" " + previousActivity);
+
 
         //Gets an instance of the sensor service, and uses that to get an instance
         //of the light sensor
@@ -76,5 +85,14 @@ public class LuxReadingActivity extends AppCompatActivity implements SensorEvent
         //Unregister the sensor when the activity pauses to save battery.
         super.onPause();
         sm.unregisterListener(this);
+    }
+
+    public void onSaveLuxReading(View view) {
+        TextView luxReadingTV = (TextView) findViewById(R.id.lux);
+        String luxReading = String.valueOf(luxReadingTV.getText());
+        Intent goingBack = new Intent();
+        goingBack.putExtra("LuxReading", luxReading);
+        setResult(RESULT_OK, goingBack);
+        finish();
     }
 }
