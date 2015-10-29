@@ -1,9 +1,12 @@
 package dk.ucn.androidproject.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
 
@@ -47,5 +50,15 @@ public class newUserActivity extends AppCompatActivity {
         user.setMail(email);
 
         ud.insertUser(user);
+
+        Context context = getApplicationContext();
+        CharSequence text = "User created";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context,text, duration);
+        toast.show();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
