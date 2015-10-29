@@ -85,7 +85,9 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
             viewHolder = (GroupViewHolder)convertView.getTag();
         }
 
-        //TextView lblListHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
+        /*TextView lblListHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
+        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setText(headerTitle);*/
         viewHolder.txtGroupHeader.setTypeface(null, Typeface.BOLD);
         viewHolder.txtGroupHeader.setText(headerTitle);
         return convertView;
@@ -94,15 +96,23 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        //TODO Holderpattern
+        ChildViewHolder viewHolder;
         final String childText = (String)getChild(groupPosition, childPosition).getDescription();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_item, null);
+            viewHolder = new ChildViewHolder();
+            viewHolder.txtChildText = (TextView)convertView.findViewById(R.id.lblListItem);
+            convertView.setTag(viewHolder);
         }
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
-        txtListChild.setText(childText);
+        else {
+            viewHolder = (ChildViewHolder)convertView.getTag();
+        }
+
+        /*TextView txtChildText = (TextView)convertView.findViewById(R.id.lblListItem);
+        txtChildText.setText(childText);*/
+        viewHolder.txtChildText.setText(childText);
         return convertView;
     }
 

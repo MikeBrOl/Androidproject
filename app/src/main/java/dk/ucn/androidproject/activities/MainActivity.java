@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*//Starts EvaluationActivity
-        Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
-        startActivity(intent);*/
-
     }
 
     @Override
@@ -68,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         UserDao ud = new UserDao(this);
         User user = ud.getUserByUsername(userName);
+        //crashes if userName isn't found -- TODO try and catch
         Log.i("__MA", "" + user.get_id());
 
         BasicPasswordEncryptor pe = new BasicPasswordEncryptor();

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,6 +82,18 @@ public class EvaluateItemActivity extends AppCompatActivity {
         if (currentItem.getNote() != null){
             noteInput.setText(currentItem.getNote());
         }
+        noteInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND){
+                    currentItem.setNote(v.getText().toString());
+                    hideSoftKeyboard();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
         if (currentItem.getLux() != null){
             txtLux.setText(currentItem.getLux());
@@ -111,7 +126,13 @@ public class EvaluateItemActivity extends AppCompatActivity {
                 saveCurrentItem();
             }
         });
+    }
 
+    private void hideSoftKeyboard() {
+        if (getCurrentFocus() != null){
+            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     private Item loadCurrentItem() {
@@ -123,7 +144,6 @@ public class EvaluateItemActivity extends AppCompatActivity {
     }
 
     private void saveCurrentItem() {
-        currentItem.setNote(noteInput.getText().toString());
         if (itemDao.createItem(currentItem, currentItemDescriptionId, currentEvaluationId)){
             resultIntent = new Intent();
             setResult(RESULT_OK, resultIntent);
