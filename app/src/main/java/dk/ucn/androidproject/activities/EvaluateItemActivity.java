@@ -30,11 +30,12 @@ public class EvaluateItemActivity extends AppCompatActivity {
     private Spinner pointSpinner;
     private EditText noteInput;
     private TextView lblLux;
-    private EditText txtLux;
+    private TextView txtLux;
     private TextView lblSlope;
-    private EditText txtSlope;
+    private TextView txtSlope;
     private Button btnLux;
     private Button btnSlope;
+    public static final int RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,8 @@ public class EvaluateItemActivity extends AppCompatActivity {
         btnLux.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO measure lux intent
+
+                onGetLuxClick(v);
             }
         });
 
@@ -140,13 +142,13 @@ public class EvaluateItemActivity extends AppCompatActivity {
 
     private void setVisibilityOfWidgets(boolean isLuxMeasurable,boolean isSlopeMeasurable) {
         lblLux = (TextView)findViewById(R.id.lbl_lux);
-        txtLux = (EditText)findViewById(R.id.txt_lux);
+        txtLux = (TextView)findViewById(R.id.txt_lux);
         lblLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.GONE);
         txtLux.setVisibility(isLuxMeasurable ? View.VISIBLE : View.GONE);
 
 
         lblSlope = (TextView)findViewById(R.id.lbl_slope);
-        txtSlope = (EditText)findViewById(R.id.txt_slope);
+        txtSlope = (TextView)findViewById(R.id.txt_slope);
         lblSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.GONE);
         txtSlope.setVisibility(isSlopeMeasurable ? View.VISIBLE : View.GONE);
 
@@ -165,18 +167,20 @@ public class EvaluateItemActivity extends AppCompatActivity {
     public void onGetLuxClick(View view) {
         Intent getLuxReadingScreen = new Intent(this, LuxReadingActivity.class);
 
-        final int result = 1;
-
         //getLuxReadingScreen.putExtra("callingLux", "EvaluateItemActivity");
-        startActivityForResult(getLuxReadingScreen, result);
+        startActivityForResult(getLuxReadingScreen, RESULT);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        
-        String luxSentBack = data.getStringExtra("LuxReading");
+        if (requestCode == RESULT){
+            if (resultCode == RESULT_OK){
+                String luxSentBack = data.getStringExtra("LuxReading");
+                txtLux.setText((luxSentBack));
+                currentItem.setLux(luxSentBack);
+            }
+        }
 
     }
 }

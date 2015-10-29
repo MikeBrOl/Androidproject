@@ -18,7 +18,7 @@ import dk.ucn.androidproject.model.TestData;
 public class DBAccess extends SQLiteOpenHelper {
     private static DBAccess instance;
     private static final String DATABASE_NAME = "house-enabler-db";
-    private static final int VERSION = 5;
+    private static final int VERSION = 6;
 
     private class InsertTestDataTask extends AsyncTask<SQLiteDatabase, Integer, Boolean> {
 

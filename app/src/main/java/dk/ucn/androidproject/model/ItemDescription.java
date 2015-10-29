@@ -67,6 +67,8 @@ public class ItemDescription {
     }
 
     public void setIsHandled(boolean isHandled) {
+
         this.isHandled = isHandled;
+        //notify listeners
     }
 }

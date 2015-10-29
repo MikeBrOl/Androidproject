@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* //Starts EvaluationActivity
+        /*//Starts EvaluationActivity
         Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
         startActivity(intent);*/
 
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         UserDao ud = new UserDao(this);
         User user = ud.getUserByUsername(userName);
+        Log.i("__MA", "" + user.get_id());
 
         BasicPasswordEncryptor pe = new BasicPasswordEncryptor();
         String encryptedPassword = user.getPassword();
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(getApplicationContext(), EvaluationActivity.class);
             long userID = user.get_id();
+            Log.i("__MA", "" + userID);
             intent.putExtra(EXTRA_USER_ID, userID);
             startActivity(intent);
         }

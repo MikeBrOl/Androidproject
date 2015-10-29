@@ -92,6 +92,9 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
+        /*CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+        checkBox.setChecked(false);
+        checkBox.setClickable(false);*/
 
         txtListChild.setText(childText);
         return convertView;

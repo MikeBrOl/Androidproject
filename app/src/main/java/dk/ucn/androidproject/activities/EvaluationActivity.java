@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +22,7 @@ import dk.ucn.androidproject.R;
 import dk.ucn.androidproject.dao.EvaluationDao;
 import dk.ucn.androidproject.dao.ItemCategoryDao;
 import dk.ucn.androidproject.dao.ItemDescriptionDao;
+import dk.ucn.androidproject.dao.UserDao;
 import dk.ucn.androidproject.model.Evaluation;
 import dk.ucn.androidproject.model.Item;
 import dk.ucn.androidproject.model.ItemCategory;
@@ -27,8 +30,6 @@ import dk.ucn.androidproject.model.ItemDescription;
 import dk.ucn.androidproject.model.User;
 
 public class EvaluationActivity extends AppCompatActivity {
-
-
 
     private ItemCategoryDao itemCategoryDao;
     private ItemDescriptionDao itemDescriptionDao;
@@ -82,6 +83,8 @@ public class EvaluationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation);
 
+
+
         if (savedInstanceState != null){
             currentListGroupPosition = savedInstanceState.getInt(LIST_GROUP_POSITION);
             currentListChildPosition = savedInstanceState.getInt(LIST_CHILD_POSITION);
@@ -119,23 +122,27 @@ public class EvaluationActivity extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EVALUATE_ITEM_REQUEST){
             if(resultCode == RESULT_OK){
                 currentDescription.setIsHandled(true);
-                //TODO something to mark that Item has been handled
 
+                //TODO something to mark that Item has been handled
             }
         }
     }
 
     private void createNewEvaluation() {
-        //create new evaluation: setUser, setDate
-        //TODO bind user
         Evaluation evaluation = new Evaluation();
         evaluation.setDate(new Date());
-        evaluation.setUser(new User()); // get user from bundle
+        Bundle bundle = getIntent().getExtras();
+        long currentUserId = bundle.getLong(MainActivity.EXTRA_USER_ID);
+        Log.i("__EA", "" + currentUserId);
+        evaluation.setUser(new UserDao(getApplicationContext()).getUser(currentUserId));
+
         EvaluationDao evaluationDao = new EvaluationDao(getApplicationContext());
         currentEvaluationId = evaluationDao.createEvaluation(evaluation);
     }
