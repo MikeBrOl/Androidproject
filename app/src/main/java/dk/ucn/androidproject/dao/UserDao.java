@@ -72,7 +72,7 @@ public class UserDao {
 
     public User getUserByUsername(String userName)
     {
-        Cursor c = database.query("users", allColumns, "userName = " + userName, null, null, null, null);
+        Cursor c = database.query("users", allColumns, "username = ?", new String[]{"" + userName}, null, null, null, null);
         c.moveToFirst();
         User user = cursorToUser(c);
         c.close();
