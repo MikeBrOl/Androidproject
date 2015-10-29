@@ -43,7 +43,7 @@ public class newUserActivity extends AppCompatActivity {
 //        user.setName(name);
 //        user.setUserName(username);
 //        user.setPassword(encryptedPassword);
-//        user.seteMail(email);
+//        user.setMail(email);
 //
 //        ud.insertUser(user);
 
