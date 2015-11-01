@@ -1,8 +1,10 @@
 package dk.ucn.androidproject.activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +27,14 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<ItemCategory> listDataHeader;
     private HashMap<String, List<ItemDescription>> listDataChild;
+    private int counter = 0;
 
     public ExpandableItemListAdapter(Context context, HashMap<String, List<ItemDescription>> listDataChild, List<ItemCategory> listDataHeader) {
         this.context = context;
         this.listDataChild = listDataChild;
         this.listDataHeader = listDataHeader;
+        counter += 1;
+        Log.i("__Adapter", "" + counter);
     }
 
     @Override
@@ -113,6 +118,10 @@ public class ExpandableItemListAdapter extends BaseExpandableListAdapter {
         /*TextView txtChildText = (TextView)convertView.findViewById(R.id.lblListItem);
         txtChildText.setText(childText);*/
         viewHolder.txtChildText.setText(childText);
+       /* if (getChild(groupPosition, childPosition).isHandled()){
+            viewHolder.txtChildText.setTextColor(Color.BLUE);
+            Log.i("__Adapter", "" + getChild(groupPosition, childPosition).getDescription() );
+        }*/
         return convertView;
     }
 

@@ -47,8 +47,9 @@ public class ItemDescriptionDao {
         itemDescription.setId(cursor.getLong(0));
         itemDescription.setDescription(cursor.getString(1));
         itemDescription.setCategory(new ItemCategoryDao(this.context).findCategoryById(cursor.getLong(2)));
-        itemDescription.setLuxMeasurable(cursor.getInt(3) == 1 ? true : false);
-        itemDescription.setSlopeMeasurable(cursor.getInt(4) == 1 ? true : false);
+        itemDescription.setLuxMeasurable(cursor.getInt(3) == 1);
+        itemDescription.setSlopeMeasurable(cursor.getInt(4) == 1);
+        itemDescription.setIsHandled(false);
         return itemDescription;
     }
 

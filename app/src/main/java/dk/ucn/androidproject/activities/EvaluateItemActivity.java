@@ -3,7 +3,6 @@ package dk.ucn.androidproject.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -39,6 +38,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
     private Button btnLux;
     private Button btnSlope;
     public static final int RESULT = 1;
+    public static final String DESCRIPTION_ID = "DESCRIPTION_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
         currentItemDescriptionId = bundle.getLong(EvaluationActivity.CURRENT_ITEM_DESCRIPTION_ID);
         currentEvaluationId = bundle.getLong(EvaluationActivity.CURRENT_EVALUATION_ID);
         currentDescriptionTitle = bundle.getString(EvaluationActivity.CURRENT_DESCRIPTION);
-        boolean isLuxMeasurable = bundle.getBoolean(EvaluationActivity.CURRENT_LUX_MEASURABLITY);
+        boolean isLuxMeasurable = bundle.getBoolean(EvaluationActivity.CURRENT_LUX_MEASURABILITY);
         boolean isSlopeMeasurable = bundle.getBoolean(EvaluationActivity.CURRENT_SLOPE_MEASURABILITY);
 
         setVisibilityOfWidgets(isLuxMeasurable, isSlopeMeasurable);
@@ -147,6 +147,7 @@ public class EvaluateItemActivity extends AppCompatActivity {
         if (itemDao.createItem(currentItem, currentItemDescriptionId, currentEvaluationId)){
             resultIntent = new Intent();
             setResult(RESULT_OK, resultIntent);
+            resultIntent.putExtra(DESCRIPTION_ID, currentItemDescriptionId);
             onBackPressed();
         }
     }

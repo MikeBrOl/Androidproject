@@ -1,5 +1,7 @@
 package dk.ucn.androidproject.model;
 
+import android.util.Log;
+
 /**
  * Created by ki on 21-10-2015.
  */
@@ -69,6 +71,6 @@ public class ItemDescription {
     public void setIsHandled(boolean isHandled) {
 
         this.isHandled = isHandled;
-        //notify listeners
+        Log.i("__setIsHandled", getDescription() + " " + isHandled);
     }
 }

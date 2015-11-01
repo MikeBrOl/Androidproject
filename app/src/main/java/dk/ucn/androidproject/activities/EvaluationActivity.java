@@ -9,11 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +21,8 @@ import dk.ucn.androidproject.dao.ItemCategoryDao;
 import dk.ucn.androidproject.dao.ItemDescriptionDao;
 import dk.ucn.androidproject.dao.UserDao;
 import dk.ucn.androidproject.model.Evaluation;
-import dk.ucn.androidproject.model.Item;
 import dk.ucn.androidproject.model.ItemCategory;
 import dk.ucn.androidproject.model.ItemDescription;
-import dk.ucn.androidproject.model.User;
 
 public class EvaluationActivity extends AppCompatActivity {
 
@@ -46,7 +41,7 @@ public class EvaluationActivity extends AppCompatActivity {
     public static final String CURRENT_EVALUATION_ID = "CURRENT_EVALUATION_ID";
     public static final String CURRENT_ITEM_DESCRIPTION_ID = "CURRENT_ITEM_DESCRIPTION_ID";
     public static final String CURRENT_DESCRIPTION = "CURRENT_DESCRIPTION";
-    public static final java.lang.String CURRENT_LUX_MEASURABLITY = "CURRENT_LUX_MEASURABILITY";
+    public static final java.lang.String CURRENT_LUX_MEASURABILITY = "CURRENT_LUX_MEASURABILITY";
     public static final java.lang.String CURRENT_SLOPE_MEASURABILITY ="CURRENT_SLOPE_MEASURABILITY";
     private static final String LIST_CHILD_POSITION = "LIST_CHILD_POSITION";
     private static final String LIST_GROUP_POSITION = "LIST_GROUP_POSITION";
@@ -83,8 +78,6 @@ public class EvaluationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation);
 
-
-
         if (savedInstanceState != null){
             currentListGroupPosition = savedInstanceState.getInt(LIST_GROUP_POSITION);
             currentListChildPosition = savedInstanceState.getInt(LIST_CHILD_POSITION);
@@ -104,6 +97,7 @@ public class EvaluationActivity extends AppCompatActivity {
                 currentListGroupPosition = groupPosition;
                 currentListChildPosition = childPosition;
                 currentDescription = listAdapter.getChild(groupPosition, childPosition);
+                Log.i("__currDesc", currentDescription.getDescription());
                 currentItemDescriptionId = listAdapter.getChild(groupPosition, childPosition).getId();
                 currentDescriptionTitle = listAdapter.getChild(groupPosition, childPosition).getDescription();
 
@@ -113,7 +107,7 @@ public class EvaluationActivity extends AppCompatActivity {
                 evaluateItem.putExtra(CURRENT_EVALUATION_ID, currentEvaluationId);
                 evaluateItem.putExtra(CURRENT_ITEM_DESCRIPTION_ID, currentItemDescriptionId);
                 evaluateItem.putExtra(CURRENT_DESCRIPTION, currentDescriptionTitle);
-                evaluateItem.putExtra(CURRENT_LUX_MEASURABLITY, listAdapter.getChild(groupPosition, childPosition).isLuxMeasurable());
+                evaluateItem.putExtra(CURRENT_LUX_MEASURABILITY, listAdapter.getChild(groupPosition, childPosition).isLuxMeasurable());
                 evaluateItem.putExtra(CURRENT_SLOPE_MEASURABILITY, listAdapter.getChild(groupPosition, childPosition).isSlopeMeasurable());
                 startActivityForResult(evaluateItem, EVALUATE_ITEM_REQUEST);
 
@@ -128,9 +122,10 @@ public class EvaluationActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EVALUATE_ITEM_REQUEST){
             if(resultCode == RESULT_OK){
+               /* Log.i("__currDescRes", currentDescription.getDescription());
                 currentDescription.setIsHandled(true);
-
-                //TODO something to mark that Item has been handled
+                Log.i("__onActivityRes", currentDescription.getDescription() + "" + currentDescription.isHandled());
+                listAdapter.notifyDataSetChanged();*/
             }
         }
     }
